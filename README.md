@@ -20,20 +20,18 @@ For BuddyPress **Group Maps**, please see: [BP Maps for Groups](http://www.philo
 
 For more information about this plugin, please visit [BP Profile Location](http://www.philopress.com/products/bp-profile-location/ "BP Profile Location")
 
-<p align="center">
+
 ![alt text](screenshots/screenshot-1.jpg "The Edit screen on a member profile with Address Auto-Complete")
 
 The Edit screen on a member profile with Address Auto-Complete
-</p>
 
-<p align="center">
+
 ![alt text](screenshots/screenshot-2.jpg "Creating a Profile Field of Type > Location")
 
 Creating a Profile Field of Type > Location
-</p>
 
-<p align="center">
+
+
 ![alt text](screenshots/screenshot-3.jpg "GeoCode option when creating a Profile Field")
 
 GeoCode option when creating a Profile Field
-</p>
