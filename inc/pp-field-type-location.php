@@ -73,34 +73,33 @@ if ( !class_exists('PP_Field_Location') ) {
 
 			$field = new BP_XProfile_Field( $field_id );
 
-			$value_to_return = strip_tags($value);
+			if ( $field->type == 'location' ) {
 
-			if ($value_to_return !== '') {
+				$value_to_return = strip_tags( $value );
 
-				if ($field->type == 'location') {
-
-					$value_to_return = $value;
-
-				}
+				if ( $value_to_return !== '' )
+					$value = apply_filters('pp_loc_show_field_data', $value, $field_id);
+				else
+					$value  = $value_to_return;
 			}
 
-			return apply_filters('pp_loc_show_field_value', $value_to_return, $field->type, $field_id, $value);
+			return $value;
+
 		}
 
 		function pp_loc_get_field_value( $value='', $type='', $id='' ) {
 
-			$value_to_return = strip_tags( $value );
+			if ( $type == 'location' ) {
 
-			if ($value_to_return !== '') {
+				$value_to_return = strip_tags( $value );
 
-				if ( $type == 'location' ) {
-
-					$value_to_return = $value;
-
-				}
+				if ( $value_to_return !== '' )
+					$value = apply_filters('pp_loc_show_field_value', $value, $type, $id);
+				else
+					$value  = $value_to_return;
 			}
 
-			return apply_filters('pp_loc_show_field_value', $value_to_return, $type, $id, $value);
+			return $value;
 		}
 
 

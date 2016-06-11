@@ -6,7 +6,7 @@ Author URI: http://philopress.com/contact/
 Plugin URI: http://philopress.com/products/
 Requires at least: WP 4.0
 Tested up to: WP 4.5.2
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 
 A BuddyPress plugin that creates a xProfile Location field type that use the Google Places API
@@ -55,11 +55,17 @@ For more information about this plugin, please visit [BP Profile Location](http:
 
 == Changelog ==
 
+= 1.1 =
+* Fix autolink issue
+
 = 1.0 =
 * Initial release.
 
 
 == Upgrade Notice ==
+
+= 1.1 =
+* Fix autolink issue
 
 = 1.0 =
 
