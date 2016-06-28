@@ -6,7 +6,7 @@ Author URI: http://philopress.com/contact/
 Plugin URI: http://philopress.com/products/
 Requires at least: WP 4.0
 Tested up to: WP 4.5.2
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 
 A BuddyPress plugin that creates a xProfile Location field type that use the Google Places API
@@ -24,9 +24,9 @@ A latitude / longitude 'geocode' will be saved as a separate field, if that opti
 
 You can then use the geocode in your preferred Member Map solution.
 
-Or you may be interested in this **Member Map** solution: [BP Maps for Members](http://www.philopress.com/bp-maps-for-members "BP Maps for Members")
+Or you may be interested in this BuddyPress **Member Map** solution: [BP Maps for Members](http://www.philopress.com/products/bp-maps-for-members "BP Maps for Members")
 
-For BuddyPress **Group Maps**, please see: [BP Maps for Groups](http://www.philopress.com/bp-maps-for-groups "BP Maps for Groups")
+For BuddyPress **Group Maps**, please see: [BP Maps for Groups](http://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
 
 
 For more information about this plugin, please visit [BP Profile Location](http://www.philopress.com/products/bp-profile-location/ "BP Profile Location")
@@ -34,17 +34,35 @@ For more information about this plugin, please visit [BP Profile Location](http:
 
 == Installation ==
 
-1. Unzip and then upload the 'bp-xprofile-location' folder to the '/wp-content/plugins/' directory
+1. If you have not entered a Google Maps API Key for one of your other PhiloPress plugins - see the FAQ 
 
-2. Activate the plugin through the 'Plugins' menu in WordPress
+2. Upload the zip on the Plugins > Add screen in wp-admin
 
-3. Go to wp-admin > Users > Profile Fields > Add New Field and Create a profile field of Type = Location.
+3. Activate the plugin through the 'Plugins' menu in WordPress
+
+4. Go to wp-admin > Users > Profile Fields > Add New Field and Create a profile field of Type = Location.
+
+
 
 
 == Frequently Asked Questions ==
+
+= Do I need a Google Maps API Key? =
+Yes. If you need help, read this tutorial: [Google Maps API Key](http://www.philopress.com/google-maps-api-key/ "Google Maps API Key")
+
+= I have a Google Maps API Key. Where do I put it? =
+* You will need to unzip the plugin. 
+* Then open this file in a text editor: <em>bp-xprofile-location\inc\pp-field-type-location.php</em>
+* And paste your Key where it says 'Paste Your Key Here'. Don't delete the single quotes. Save the file. Re-zip the plugin. 
+
+Other questions:
 * Multi-site support - Yes
 * Works with [BP Profile Search](https://wordpress.org/plugins/bp-profile-search/ "BP Profile Search plugin")
-* Maps are not included. For maps, please see: [BP Maps for Members](http://www.philopress.com/bp-maps-for-members "BP Maps for Members")
+* Maps are not included. For maps, please see: [BP Maps for Members](http://www.philopress.com/products/bp-maps-for-members "BP Maps for Members")
+
+
+
+
 
 
 == Screenshots ==
@@ -55,6 +73,9 @@ For more information about this plugin, please visit [BP Profile Location](http:
 
 == Changelog ==
 
+= 1.2 =
+* Added requirement for Google Maps API Key. 
+
 = 1.1 =
 * Fix autolink issue
 
@@ -63,6 +84,9 @@ For more information about this plugin, please visit [BP Profile Location](http:
 
 
 == Upgrade Notice ==
+
+= 1.2 =
+* Added requirement for Google Maps API Key. If you were using this plugin prior to June 22, 2016, you don't need this upgrade. 
 
 = 1.1 =
 * Fix autolink issue

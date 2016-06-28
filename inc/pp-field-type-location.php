@@ -7,8 +7,14 @@ if ( !class_exists('PP_Field_Location') ) {
 
 	class PP_Field_Location {
 
+		private $gapikey = 'Paste Your Key Here';
+		
 		function __construct () {
 
+			$check_for_gapikey = get_site_option( 'pp_gapikey' );
+			if ( $check_for_gapikey != false )
+				$this->gapikey = $check_for_gapikey;
+		
 			add_action( 'wp_enqueue_scripts',       array( $this, 'pp_loc_enqueue') );
 			add_action( 'admin_enqueue_scripts',    array( $this, 'pp_loc_enqueue_admin') );
 
@@ -52,7 +58,7 @@ if ( !class_exists('PP_Field_Location') ) {
 		function pp_loc_scripts_styles() {
 
 		    if ( !wp_script_is( 'google-places-api', 'registered' ) ) {
-		        wp_register_script( 'google-places-api', ( is_ssl() ? 'https' : 'http' ) . '://maps.googleapis.com/maps/api/js?libraries=places', array( 'jquery' ), false );
+		        wp_register_script( 'google-places-api',  '//maps.googleapis.com/maps/api/js?key=' . $this->gapikey . '&libraries=places', array( 'jquery' ), false );
 		        wp_print_scripts( 'google-places-api' );
 		    }
 
