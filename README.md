@@ -18,7 +18,7 @@ Or you may be interested in this **Member Map** solution: [BP Maps for Members](
 For BuddyPress **Group Maps**, please see: [BP Maps for Groups](http://www.philopress.com/bp-maps-for-groups "BP Maps for Groups")
 
 
-For more information about this plugin, please visit [BP Profile Location](http://www.philopress.com/products/bp-profile-location/ "BP Profile Location")
+For more information about this plugin, please visit [BP xProfile Location](http://www.philopress.com/products/bp-xprofile-location/ "BP xProfile Location")
 
 
 ![alt text](screenshots/screenshot-1.jpg "The Edit screen on a member profile with Address Auto-Complete")
