@@ -29,7 +29,7 @@ Or you may be interested in this BuddyPress **Member Map** solution: [BP Maps fo
 For BuddyPress **Group Maps**, please see: [BP Maps for Groups](http://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
 
 
-For more information about this plugin, please visit [BP Profile Location](http://www.philopress.com/products/bp-profile-location/ "BP Profile Location")
+For more information about this plugin, please visit [BP xProfile Location](http://www.philopress.com/products/bp-xprofile-location/ "BP xProfile Location")
 
 
 == Installation ==

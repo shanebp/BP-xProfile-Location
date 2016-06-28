@@ -38,7 +38,7 @@ GeoCode option when creating a Profile Field
 
 
 = Do I need a Google Maps API Key? =
-Yes. If you need help, read this tutorial: [Google Maps API Key](http://www.philopress.com/google-maps-api-key/ "Google Maps API Key")
+* Yes. If you need help, read this tutorial: [Google Maps API Key](http://www.philopress.com/google-maps-api-key/ "Google Maps API Key")
 
 = I have a Google Maps API Key. Where do I put it? =
 * You will need to unzip the plugin. 
