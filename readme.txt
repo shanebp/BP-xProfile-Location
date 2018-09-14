@@ -4,9 +4,9 @@ Donate link: http://www.philopress.com/donate/
 Tags: buddypress, members, profile, xprofile, location, address, geocode, map
 Author URI: http://philopress.com/contact/
 Plugin URI: http://philopress.com/products/
-Requires at least: WP 4.0
-Tested up to: WP 4.5.2
-Stable tag: 1.2
+Requires at least: 4.0
+Tested up to: 4.9
+Stable tag: 1.6
 License: GPLv2 or later
 
 A BuddyPress plugin that creates a xProfile Location field type that use the Google Places API
@@ -55,12 +55,10 @@ Yes. If you need help, read this tutorial: [Google Maps API Key](http://www.phil
 * Then open this file in a text editor: <em>bp-xprofile-location\inc\pp-field-type-location.php</em>
 * And paste your Key where it says 'Paste Your Key Here'. Don't delete the single quotes. Save the file. Re-zip the plugin. 
 
-Other questions:
+= Other questions? =
 * Multi-site support - Yes
 * Works with [BP Profile Search](https://wordpress.org/plugins/bp-profile-search/ "BP Profile Search plugin")
 * Maps are not included. For maps, please see: [BP Maps for Members](http://www.philopress.com/products/bp-maps-for-members "BP Maps for Members")
-
-
 
 
 
@@ -73,6 +71,19 @@ Other questions:
 
 == Changelog ==
 
+= 1.6 =
+* Add 'Description' field output in class-pp-field-type-location.php
+
+= 1.5 =
+* Prevent saving of field data and geocode if the value is an empty serialized array, a:0:{}
+
+= 1.4 =
+* Changed the method for supporting the BP Profile Search plugin. 
+
+= 1.3 =
+* Added check for enabled BuddyPress Extended Profiles component
+* Tested with WP 4.7 and BP 2.7.2
+
 = 1.2 =
 * Added requirement for Google Maps API Key. 
 
@@ -83,10 +94,21 @@ Other questions:
 * Initial release.
 
 
+
 == Upgrade Notice ==
 
+= 1.5 =
+* Prevent saving of field data and geocode if the value is an empty serialized array, a:0:{}
+
+= 1.4 =
+* Changed the method for supporting the BP Profile Search plugin.  You must have at least version 4.7.8 of the BP Profile Search plugin in order to be able to search on any profile fields that you add using the BP xProfile Location plugin. 
+
+= 1.3 =
+* Added check for enabled BuddyPress Extended Profiles component
+* Tested with WP 4.7 and BP 2.7.2
+
 = 1.2 =
-* Added requirement for Google Maps API Key. If you were using this plugin prior to June 22, 2016, you don't need this upgrade. 
+* Added requirement for Google Maps API Key. If you were using this plugin prior to June 22, 2016, you don't need this update. If you decide to update anyway, you will need a Key - please see the FAQ for more info
 
 = 1.1 =
 * Fix autolink issue
