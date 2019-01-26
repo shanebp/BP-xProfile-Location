@@ -7,13 +7,18 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 
 if ( !class_exists('PP_Field_Location') ) {
 	class PP_Field_Location {
+
 		private $gapikey = 'Paste Your Key Here';
-		
+		/*
+		private $gapikey is Deprecated.
+		Please Go to wp-admin > Settings > BuddyPress > Options. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
+		*/
+
 		function __construct () {
-			$check_for_gapikey = get_site_option( 'pp_gapikey' );
+			$check_for_gapikey = bp_get_option( 'pp_gapikey' );
 			if ( $check_for_gapikey != false )
 				$this->gapikey = $check_for_gapikey;
-		
+
 			add_action( 'wp_enqueue_scripts',       array( $this, 'pp_loc_enqueue') );
 			add_action( 'admin_enqueue_scripts',    array( $this, 'pp_loc_enqueue_admin') );
 			add_action( 'xprofile_data_after_save',     array($this, 'pp_loc_xprofile_data_after_save') );
@@ -29,19 +34,20 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 			add_action( 'bp_signup_validate',       array($this, 'pp_loc_signup_validate') );
 		}
 		function pp_loc_enqueue() {
-			if ( bp_is_user_profile_edit() || bp_is_register_page() )
+			if ( bp_is_user_profile_edit() || bp_is_register_page() ) {
 				$this->pp_loc_scripts_styles();
+			}
 		}
 		function pp_loc_enqueue_admin( $hook ) {
-			if ($hook != 'users_page_bp-profile-edit' )
+			if ($hook != 'users_page_bp-profile-edit' ) {
 				return;
+			}
 			$this->pp_loc_scripts_styles();
 		}
 		function pp_loc_scripts_styles() {
-		    if ( !wp_script_is( 'google-places-api', 'registered' ) ) {
-		        wp_register_script( 'google-places-api',  '//maps.googleapis.com/maps/api/js?key=' . $this->gapikey . '&libraries=places', array( 'jquery' ), false );
-		        wp_print_scripts( 'google-places-api' );
-		    }
+			wp_register_script( 'google-places-api',  '//maps.googleapis.com/maps/api/js?key=' . $this->gapikey . '&libraries=places', array( 'jquery' ), false );
+			wp_print_scripts( 'google-places-api' );
+
 		}
 		function pp_loc_get_field_types( $fields ) {
 			$new_fields = array(
@@ -54,14 +60,14 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 			$field = new BP_XProfile_Field( $field_id );
 			if ( $field->type == 'location' ) {
 				$value_to_return = strip_tags( $value );
-				if ( $value_to_return !== '' )
+				if ( $value_to_return !== '' ) {
 					$value = apply_filters('pp_loc_show_field_data', $value, $field_id);
-				else
+				} else {
 					$value  = $value_to_return;
-				
-				
+				}
+
 				if ( $value == 'a:0:{}' ) {
-					
+
 					$value = 'id: ' . $id;
 				}
 			}
@@ -70,13 +76,14 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 		function pp_loc_get_field_value( $value='', $type='', $id='' ) {
 			if ( $type == 'location' ) {
 				$value_to_return = strip_tags( $value );
-				if ( $value_to_return !== '' )
+				if ( $value_to_return !== '' ) {
 					$value = apply_filters('pp_loc_show_field_value', $value, $type, $id);
-				else
+				} else {
 					$value  = $value_to_return;
-				
+				}
+
 				if ( $value == 'a:0:{}' ) {
-					
+
 					$value = 'id: ' . $id;
 				}
 			}
@@ -105,7 +112,7 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 					$field = new BP_XProfile_Field( $field_id );
 					if ($field->type == 'location' ) {
 						if (isset($_POST['field_' . $field_id]) && ! empty( $_POST['field_' . $field_id] ) ) {
-							if( ! empty( $_POST['pp_'.$field_id.'_geocode'] ) ) {
+							if ( ! empty( $_POST['pp_'.$field_id.'_geocode'] ) ) {
 								$geocode =  sanitize_text_field( $_POST['pp_'.$field_id.'_geocode'] );
 								$meta['geocode_' . $field_id] = $geocode;
 							}
@@ -116,8 +123,8 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 			return $meta;
 		}
 		function pp_loc_signup_user( $user_id, $user_login, $user_password, $user_email, $usermeta ) {
-			if( !is_multisite() ) {
-				if( $user_id ) {
+			if ( ! is_multisite() ) {
+				if ( $user_id ) {
 					if ( bp_is_active( 'xprofile' ) ) {
 						if ( isset( $_POST['signup_profile_field_ids'] ) && !empty( $_POST['signup_profile_field_ids'] ) ) {
 							$profile_field_ids = explode(',', $_POST['signup_profile_field_ids']);
@@ -125,7 +132,7 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 								$field = new BP_XProfile_Field( $field_id );
 								if ($field->type == 'location' ) {
 									if (isset($_POST['field_' . $field_id]) && ! empty( $_POST['field_' . $field_id] ) ) {
-										if( ! empty( $_POST['pp_'.$field_id.'_geocode'] ) ) {
+										if ( ! empty( $_POST['pp_'.$field_id.'_geocode'] ) ) {
 											// the $user_id var passed by the hook is just a bool, so we need to get the int
 											global $wpdb;
 											$uid = $wpdb->get_var( "SELECT ID FROM $wpdb->users WHERE user_login = '$user_login'" );
@@ -141,8 +148,8 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 			}
 		}
 		function pp_loc_activated_user( $user_id, $key, $user ) {
-			if( is_multisite() ) {
-				if( isset( $user['meta']['profile_field_ids'] ) ) {
+			if ( is_multisite() ) {
+				if ( isset( $user['meta']['profile_field_ids'] ) ) {
 					$profile_field_ids = explode(',', $user['meta']['profile_field_ids'] );
 					foreach ( $profile_field_ids as $field_id ) {
 						$field = new BP_XProfile_Field( $field_id );
@@ -156,38 +163,30 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 			}
 		}
 		function pp_loc_xprofile_data_after_save( $data ) {
-			
-			
-			/*			
-			write_log('pp_loc_xprofile_data_after_save - $data');
-			write_log($data);
-			[id] => 
-			*/
-			
+
 			$field = new BP_XProfile_Field( $data->field_id );
 			if ( $field->type == 'location' ) {
-				
+
 				if ( $data->value == 'a:0:{}' ) {
-					
+
 					xprofile_delete_field_data( $data->field_id, $data->user_id );
-					
+
 					delete_user_meta( $data->user_id, 'geocode_' . $data->field_id );
-					
-				}
-				
-				elseif( ! empty( $_POST['pp_'.$data->field_id.'_geocode'] ) ) {
+
+				} elseif ( ! empty( $_POST['pp_'.$data->field_id.'_geocode'] ) ) {
 					$geocode =  sanitize_text_field( $_POST['pp_'.$data->field_id.'_geocode'] );
 					update_user_meta( $data->user_id, 'geocode_' . $data->field_id, $geocode );
 				}
 			}
 		}
 		function pp_loc_xprofile_field_after_save( $obj ){
-			
+
 			//write_log('pp_loc_xprofile_field_after_save - $obj');
 			//write_log($obj);
 			if ( $obj->type == 'location' ) {
-				if ( isset( $_POST['location_option'] ) ) //&& $_POST['location_option'][1] == '1' )
+				if ( isset( $_POST['location_option'] ) ) { //&& $_POST['location_option'][1] == '1' ) {
 					bp_xprofile_update_meta( $obj->id, 'data', 'geocode', $_POST['location_option'][1] );
+				}
 				//else
 				//	bp_xprofile_delete_meta( $obj->id, 'data', 'geocode' );
 			}
@@ -196,8 +195,9 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 			delete_user_meta( $obj->user_id, 'geocode_' . $obj->field_id );
 		}
 		function pp_loc_field_options_before_save( $post_option,  $type ) {
-			if ( $type == 'location' )
+			if ( $type == 'location' )  {
 				$post_option = '';
+			}
 			return $post_option;
 		}
 	}
@@ -205,10 +205,11 @@ add_action ('bps_custom_field', 'pp_loc_profile_search_field');
 
 
 function pp_loc_initiate(){
-	
+
 	require_once( PP_LOC_DIR . '/inc/class-pp-field-type-location.php' );
-	
-	if (class_exists('PP_Field_Location'))
+
+	if (class_exists('PP_Field_Location'))  {
 		new PP_Field_Location();
+	}
 }
 add_action('bp_init','pp_loc_initiate');

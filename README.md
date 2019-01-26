@@ -1,5 +1,5 @@
 # BP-xProfile-Location
-A BuddyPress plugin that creates a xProfile Location field type that use the Google Places API
+A BuddyPress plugin that creates a xProfile Location field type that uses the Google Places API
 
 
 Creates an xProfile Location field type that use the Google Places API to populate and validate the address fields.

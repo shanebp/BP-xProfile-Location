@@ -4,10 +4,10 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 
-if( !class_exists('PP_Field_Type_Location') ) {
-	
+if ( !class_exists('PP_Field_Type_Location') ) {
+
 	class PP_Field_Type_Location extends BP_XProfile_Field_Type {
-		
+
 		public function __construct() {
 			parent::__construct();
 			$this->category = _x( 'Single Fields', 'xprofile field type category', 'buddypress' );
@@ -17,7 +17,7 @@ if( !class_exists('PP_Field_Type_Location') ) {
 			$this->set_format( '/^.+$/', 'replace' );
 			do_action( 'bp_xprofile_field_type_location', $this );
 		}
-		
+
 		public function admin_field_html (array $raw_properties = array ()) {
 			$html = $this->get_edit_field_html_elements( array_merge(
 				array(
@@ -29,7 +29,7 @@ if( !class_exists('PP_Field_Type_Location') ) {
 			<input <?php echo $html; ?>>
 			<?php
 		}
-		
+
 		public function edit_field_html ( array $raw_properties = array () ) {
 			if ( isset( $raw_properties['user_id'] ) ) {
 				unset( $raw_properties['user_id'] );
@@ -38,12 +38,12 @@ if( !class_exists('PP_Field_Type_Location') ) {
 				$raw_properties['required'] = 'required';
 			}
 			$value = bp_get_the_profile_field_edit_value();
-			
+
 				if ( $value == 'a:0:{}' ) {
-					
+
 					$value = 'PROBLEM ' . bp_get_the_profile_field_id();
 				}
-				
+
 			$html = $this->get_edit_field_html_elements( array_merge(
 				array(
 					'type'          => 'text',
@@ -63,20 +63,18 @@ if( !class_exists('PP_Field_Type_Location') ) {
 			$label_name = bp_get_the_profile_field_name();
 			$label_name = substr_replace($label_name, '&#8203;', 1, 0);
 			$save_geocode = bp_xprofile_get_meta( bp_get_the_profile_field_id(), 'data', 'geocode' );
-			if( empty( $save_geocode ) )
+			if ( empty( $save_geocode ) )
 				$save_geocode = '0';
 			?>
 			<label for="<?php bp_the_profile_field_input_name(); ?>"><?php echo $label_name; ?> <?php if ( bp_get_the_profile_field_is_required() ) : ?><?php esc_html_e( '(required)', 'buddypress' ); ?><?php endif; ?></label>
 			<?php do_action( bp_get_the_profile_field_errors_action() ); ?>
 			<input <?php echo $html; ?>  />
-			<?php bp_the_profile_field_description(); ?>										   
+			<?php bp_the_profile_field_description(); ?>
 			<script>
 				pp_<?php bp_the_profile_field_id(); ?>_geo_initialize();
 				function pp_<?php bp_the_profile_field_id(); ?>_geo_initialize() {
-					
 					var location_field_name = '<?php bp_the_profile_field_input_name() ?>';
-					
-					// prevent Google Places from misbehaving if the user hits enter
+					// An easy (read: lazy) way of preventing Google Places from misbehaving if the user hits enter
 					google.maps.event.addDomListener(document.getElementById(location_field_name), 'keydown', function(event) {
 						if (event.keyCode === 13) {
 							event.preventDefault();
@@ -86,12 +84,9 @@ if( !class_exists('PP_Field_Type_Location') ) {
 						document.getElementById(location_field_name).value = '';
 					}
 					var save_geocode = '<?php echo $save_geocode ?>';
-					
 					// if you want to use place names as well as proper addresses, use this instead
 					// pp_<?php bp_the_profile_field_id(); ?>_autocomplete = new google.maps.places.Autocomplete( (document.getElementById(location_field_name)) );
-					
 					pp_<?php bp_the_profile_field_id(); ?>_autocomplete = new google.maps.places.Autocomplete( (document.getElementById(location_field_name)), { types: ['geocode'] });
-					
 					google.maps.event.addListener(pp_<?php bp_the_profile_field_id(); ?>_autocomplete, 'place_changed', function() {
 					//	var address = pp_<?php bp_the_profile_field_id(); ?>_autocomplete.getPlace();
 						var place = pp_<?php bp_the_profile_field_id(); ?>_autocomplete.getPlace();
@@ -99,7 +94,7 @@ if( !class_exists('PP_Field_Type_Location') ) {
 						if (place.address_components) {
 							address = place.formatted_address;
 						}
-						document.getElementById(location_field_name).value = address;									 
+						document.getElementById(location_field_name).value = address;
 						if ( save_geocode == '1' )
 							pp_<?php bp_the_profile_field_id(); ?>_extract_geocode();
 					});
@@ -110,7 +105,7 @@ if( !class_exists('PP_Field_Type_Location') ) {
 
 						var place = pp_<?php bp_the_profile_field_id(); ?>_autocomplete.getPlace();
 						if ( place.geometry ) {
-							console.log('geometry');
+							//console.log('geometry');
 							var lat = place.geometry.location.lat();
 							var lng = place.geometry.location.lng();
 							var latlng = lat + ',' + lng;
@@ -122,13 +117,13 @@ if( !class_exists('PP_Field_Type_Location') ) {
 				<?php endif; ?>
 
 			</script>
-			
+
 			<?php if ( '1' == $save_geocode ) : ?>
 				<input type="hidden" id="pp_<?php bp_the_profile_field_id(); ?>_geocode" name="pp_<?php bp_the_profile_field_id(); ?>_geocode" />
 			<?php endif; ?>
 		<?php
 		}
-		
+
 		public function admin_new_field_html( BP_XProfile_Field $current_field, $control_type = '' ) {
 			$type = array_search( get_class( $this ), bp_xprofile_get_field_types() );
 			if ( false === $type ) {
@@ -156,17 +151,17 @@ if( !class_exists('PP_Field_Type_Location') ) {
 						<li>meta_value = [latitude], [longitude]</li>
 					</ul>
 					You can then use the geocode in your mapping solution.
-					<br/>Or use a solution like <a href="http://www.philopress.com/products/bp-maps-for-members/">BP Maps for Members</a>.
-					<br/>For Groups Maps, see <a href="http://www.philopress.com/products/bp-maps-for-groups/">BP Maps for Groups</a>.
+					<br/>Or use a solution like <a href="https://www.philopress.com/products/bp-maps-for-members/">BP Maps for Members</a>.
+					<br/>For Groups Maps, see <a href="https://www.philopress.com/products/bp-maps-for-groups/">BP Maps for Groups</a>.
 				</div>
 			</div>
 		<?php
 		}
-		
+
         public function is_valid( $values ) {
             $this->validation_whitelist = null;
             return parent::is_valid($values);
         }
-		
+
 	}
 }
