@@ -41,8 +41,6 @@ GeoCode option when creating a Profile Field
 * Yes. If you need help, read this tutorial: [Google Maps API Key](http://www.philopress.com/google-maps-api-key/ "Google Maps API Key")
 
 = I have a Google Maps API Key. Where do I put it? =
-* You will need to unzip the plugin. 
-* Then open this file in a text editor: <em>bp-xprofile-location\inc\pp-field-type-location.php</em>
-* And paste your Key where it says 'Paste Your Key Here'. Don't delete the single quotes. Save the file. 
+* Go to wp-admin > Settings > BuddyPress > Options. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save. 
 
 
