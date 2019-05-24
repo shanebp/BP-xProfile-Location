@@ -48,7 +48,7 @@ if ( !class_exists('PP_Field_Type_Location') ) {
 				array(
 					'type'          => 'text',
 					'value'         => $value,  //bp_get_the_profile_field_edit_value(),
-					'placeholder'   => __( 'Start typing an address', 'bp-profile-location' ),
+					'placeholder'   => __( 'Start typing an address. Then make a selection...', 'bp-profile-location' ),
 					'class'         => 'form-control',
 					'autocomplete'  => 'false'
 				),
@@ -87,6 +87,7 @@ if ( !class_exists('PP_Field_Type_Location') ) {
 					// if you want to use place names as well as proper addresses, use this instead
 					// pp_<?php bp_the_profile_field_id(); ?>_autocomplete = new google.maps.places.Autocomplete( (document.getElementById(location_field_name)) );
 					pp_<?php bp_the_profile_field_id(); ?>_autocomplete = new google.maps.places.Autocomplete( (document.getElementById(location_field_name)), { types: ['geocode'] });
+
 					google.maps.event.addListener(pp_<?php bp_the_profile_field_id(); ?>_autocomplete, 'place_changed', function() {
 					//	var address = pp_<?php bp_the_profile_field_id(); ?>_autocomplete.getPlace();
 						var place = pp_<?php bp_the_profile_field_id(); ?>_autocomplete.getPlace();
@@ -94,6 +95,15 @@ if ( !class_exists('PP_Field_Type_Location') ) {
 						if (place.address_components) {
 							address = place.formatted_address;
 						}
+	/*
+    if(place.address_components !== undefined && place.address_components.length > 0 ) {
+        address = place.formatted_address;
+    }
+    else {
+        alert( "Please select an address from the options provided by Google Maps." );
+    }
+	*/
+
 						document.getElementById(location_field_name).value = address;
 						if ( save_geocode == '1' )
 							pp_<?php bp_the_profile_field_id(); ?>_extract_geocode();

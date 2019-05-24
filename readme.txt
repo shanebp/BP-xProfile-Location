@@ -4,10 +4,10 @@ Donate link: https://www.philopress.com/donate/
 Tags: buddypress, members, profile, xprofile, location, address, geocode, map
 Author: PhiloPress
 Author URI: https://philopress.com/
-Plugin URI: https://www.philopress.com/products/bp-maps-for-members/
+Plugin URI: https://www.philopress.com/products/bp-xprofile-location/
 Requires at least: 4.0
-Tested up to: 5.0
-Stable tag: 1.8
+Tested up to: 5.1
+Stable tag: 2.0
 License: GPLv2 or later
 
 == Description ==
@@ -59,7 +59,7 @@ Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
 = Other questions? =
 * Multisite support - Yes
 * Works with [BP Profile Search](https://wordpress.org/plugins/bp-profile-search/ "BP Profile Search plugin")
-* Maps are not included. For maps, please see: [BP Maps for Members](https://www.philopress.com/products/bp-maps-for-members "BP Maps for Members")
+* Maps are not included. For member maps, please see: [BP Maps for Members](https://www.philopress.com/products/bp-maps-for-members "BP Maps for Members"). For group maps, please see: [BP Maps for Groups](https://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
 
 
 
@@ -71,6 +71,10 @@ Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
 
 
 == Changelog ==
+
+= 2.0 =
+* Tested with 5.1.1
+* Add support for distance searches via the BP Profile Search plugin IF you have the premium BP Maps for Members plugin from PhiloPress
 
 = 1.8 =
 * Tested with 5.0.2
@@ -104,6 +108,10 @@ Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
 
 
 == Upgrade Notice ==
+
+= 2.0 =
+* Tested with 5.1.1
+* Add support for distance searches via the BP Profile Search plugin IF you have the premium BP Maps for Members plugin from PhiloPress
 
 = 1.8 =
 * Tested with 5.0.2

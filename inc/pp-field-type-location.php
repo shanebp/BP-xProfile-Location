@@ -2,8 +2,50 @@
 // Exit if accessed directly
 
 if ( ! defined( 'ABSPATH' ) ) exit;
-/* add support for BP Profile Search */function pp_loc_profile_search_field ($f) {	if ($f->type != 'location')  return;	$f->format = 'text';}
-add_action ('bps_custom_field', 'pp_loc_profile_search_field');
+/* add support for string searches in BP Profile Search */function pp_loc_profile_search_field_text ($f) {	if ($f->type != 'location')  return;	$f->format = 'text';}
+add_action ('bps_custom_field', 'pp_loc_profile_search_field_text');
+
+
+
+/* check if BP Maps for Members plugin is active, if so add distance support re BP Profile Search */
+if ( function_exists( 'pp_mm_load_dot' ) ) {
+
+	add_action ('bps_custom_field', 'pp_loc_profile_search_field_distance');
+
+	function pp_loc_profile_search_field_distance ($f) {
+
+		if ($f->type != 'location') {
+			return;
+		}
+
+		$f->format = 'location';
+		$f->script_handle = 'google-places-api';
+		$f->search = 'pp_loc_profile_search_field_radial';
+	}
+
+
+	function pp_loc_profile_search_field_radial ($f) {
+
+		$filter = $f->filter; 					// the current search mode
+		//$args = $f->value; 					// array of args POSTed by the search form
+		$results = array();
+
+		if ($filter != 'distance') {
+			return bps_xprofile_search ( $f ); 	// handles the text search
+		}
+		else {
+
+			//write_log( $f );
+
+			$results = pp_mm_bp_profile_search( $f );	// array of user IDs within the radial search
+
+		}
+
+		//$results = array( 1 );
+		return $results;
+	}
+
+}
 
 if ( !class_exists('PP_Field_Location') ) {
 	class PP_Field_Location {

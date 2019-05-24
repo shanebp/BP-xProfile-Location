@@ -2,7 +2,7 @@
 /*
  * Plugin Name: BP xProfile Location
  * Description: Adds an xProfile Location field type that uses the Google Places API to complete and validate addresses
- * Version: 1.8
+ * Version: 2.0
  * Author: PhiloPress
  * Author URI: https://www.philopress.com/
  * Text Domain: bp-profile-location
