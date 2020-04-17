@@ -1,7 +1,8 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: bp-profile-location\n"
-"POT-Creation-Date: 2018-11-02 06:27-0700\n"
+"POT-Creation-Date: 2020-04-09 06:59-0700\n"
 "PO-Revision-Date: 2018-11-02 06:28-0700\n"
 "Last-Translator: \n"
 "Language-Team: PhiloPress\n"
@@ -9,18 +10,31 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n:1,2;_x:1,2c\n"
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../inc/admin-pp-field-option-location.php:12
-msgid "Google Maps API key"
-msgstr ""
-
+#: ../inc/admin-pp-field-option-location-boss.php:68
 #: ../inc/admin-pp-field-option-location.php:38
 msgid "A Key is required. If you do not have one, follow these instructions:"
+msgstr ""
+
+#: ../inc/admin-pp-field-option-location-boss.php:71
+msgid "Save PhiloPress Settings"
+msgstr ""
+
+#: ../inc/admin-pp-field-option-location-boss.php:93
+msgid "PhiloPress Settings saved."
+msgstr ""
+
+#: ../inc/admin-pp-field-option-location-boss.php:100
+msgid "There was an error. The PhiloPress Settings were not saved."
+msgstr ""
+
+#: ../inc/admin-pp-field-option-location.php:12
+msgid "Google Maps API key"
 msgstr ""
 
 #: ../inc/class-pp-field-type-location.php:13
@@ -34,28 +48,29 @@ msgid "Location"
 msgstr ""
 
 #: ../inc/class-pp-field-type-location.php:51
-msgid "Start typing an address"
+msgid "Start typing an address. Then make a selection..."
 msgstr ""
 
-#: ../inc/class-pp-field-type-location.php:140
+#: ../inc/class-pp-field-type-location.php:150
 msgid "Do you want this field to save a geocode for each member?"
 msgstr ""
 
-#: ../inc/class-pp-field-type-location.php:148
+#: ../inc/class-pp-field-type-location.php:158
 msgid "The geocode will be saved in the usermeta table in this format:"
 msgstr ""
 
-#: ../inc/pp-field-type-location.php:95
+#: ../inc/pp-field-type-location.php:145
 msgid "This is a required field"
 msgstr ""
 
-#: ../loader.php:26
+#: ../loader.php:38
 msgid ""
-"BP xProfile Location requires the BuddyPress plugin. Please install "
-"BuddyPress or deactivate the BP xProfile Location plugin."
+"BP xProfile Location requires the BuddyPress plugin or the BuddyBoss "
+"Platform plugin. Please install either of those plugins or deactivate the "
+"BP xProfile Location plugin."
 msgstr ""
 
-#: ../loader.php:45
+#: ../loader.php:63
 msgid ""
 "BP xProfile Location requires the BuddyPress Extended Profiles component. "
 "Please enable Extended Profiles or deactivate BP xProfile Location."

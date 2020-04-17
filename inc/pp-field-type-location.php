@@ -3,7 +3,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 /* add support for string searches in BP Profile Search */function pp_loc_profile_search_field_text ($f) {	if ($f->type != 'location')  return;	$f->format = 'text';}
-add_action ('bps_custom_field', 'pp_loc_profile_search_field_text');
+//add_action ('bps_custom_field', 'pp_loc_profile_search_field_text');
 
 
 
@@ -53,7 +53,8 @@ if ( function_exists( 'pp_mm_load_dot' ) ) {
 		private $gapikey = 'Paste Your Key Here';
 		/*
 		private $gapikey is Deprecated.
-		Please Go to wp-admin > Settings > BuddyPress > Options. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
+		For BuddyPress >  Go to wp-admin > Settings > BuddyPress > Options. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
+		For BuddyBoss Platform > Go to wp-admin > Settings > BuddyBoss > Integrations > PhiloPress. Find 'Google Maps API key', enter your key and Save
 		*/
 
 		function __construct () {
@@ -61,19 +62,20 @@ if ( function_exists( 'pp_mm_load_dot' ) ) {
 			if ( $check_for_gapikey != false )
 				$this->gapikey = $check_for_gapikey;
 
-			add_action( 'wp_enqueue_scripts',       array( $this, 'pp_loc_enqueue') );
-			add_action( 'admin_enqueue_scripts',    array( $this, 'pp_loc_enqueue_admin') );
-			add_action( 'xprofile_data_after_save',     array($this, 'pp_loc_xprofile_data_after_save') );
-			add_action( 'xprofile_data_after_delete',   array($this, 'pp_loc_xprofile_data_after_delete') );
-			add_action( 'xprofile_field_after_save',    array($this, 'pp_loc_xprofile_field_after_save') );
-			add_filter( 'bp_xprofile_get_field_types',          array($this, 'pp_loc_get_field_types'), 10, 1 );
-			add_filter( 'xprofile_get_field_data',              array($this, 'pp_loc_get_field_data'), 10, 2 );
-			add_filter( 'bp_get_the_profile_field_value',       array($this, 'pp_loc_get_field_value'), 10, 3 );
-			add_filter( 'xprofile_field_options_before_save',   array($this, 'pp_loc_field_options_before_save'), 20, 2 );
-			add_filter( 'bp_signup_usermeta',       array($this, 'pp_loc_signup_usermeta'), 15, 1 );
-			add_action( 'bp_core_activated_user',   array($this, 'pp_loc_activated_user'), 15, 3 );
-			add_action( 'bp_core_signup_user',      array($this, 'pp_loc_signup_user'), 15, 5 );
-			add_action( 'bp_signup_validate',       array($this, 'pp_loc_signup_validate') );
+			add_action( 'wp_enqueue_scripts',       			array( $this, 'pp_loc_enqueue') );
+			add_action( 'admin_enqueue_scripts',    			array( $this, 'pp_loc_enqueue_admin') );
+			add_action( 'xprofile_data_after_save',     		array( $this, 'pp_loc_xprofile_data_after_save') );
+			add_action( 'xprofile_data_after_delete',   		array( $this, 'pp_loc_xprofile_data_after_delete') );
+			add_action( 'xprofile_field_after_save',    		array( $this, 'pp_loc_xprofile_field_after_save') );
+			add_action( 'xprofile_field_after_delete',   		array( $this, 'pp_loc_xprofile_field_after_delete'), 99, 2 );
+			add_filter( 'bp_xprofile_get_field_types',          array( $this, 'pp_loc_get_field_types'), 10, 1 );
+			add_filter( 'xprofile_get_field_data',              array( $this, 'pp_loc_get_field_data'), 10, 2 );
+			add_filter( 'bp_get_the_profile_field_value',       array( $this, 'pp_loc_get_field_value'), 10, 3 );
+			add_filter( 'xprofile_field_options_before_save',   array( $this, 'pp_loc_field_options_before_save'), 20, 2 );
+			add_filter( 'bp_signup_usermeta',       			array( $this, 'pp_loc_signup_usermeta'), 15, 1 );
+			add_action( 'bp_core_activated_user',   			array( $this, 'pp_loc_activated_user'), 15, 3 );
+			add_action( 'bp_core_signup_user',      			array( $this, 'pp_loc_signup_user'), 15, 5 );
+			add_action( 'bp_signup_validate',       			array( $this, 'pp_loc_signup_validate') );
 		}
 		function pp_loc_enqueue() {
 			if ( bp_is_user_profile_edit() || bp_is_register_page() ) {
@@ -216,15 +218,18 @@ if ( function_exists( 'pp_mm_load_dot' ) ) {
 					delete_user_meta( $data->user_id, 'geocode_' . $data->field_id );
 
 				} elseif ( ! empty( $_POST['pp_'.$data->field_id.'_geocode'] ) ) {
+
 					$geocode =  sanitize_text_field( $_POST['pp_'.$data->field_id.'_geocode'] );
+
 					update_user_meta( $data->user_id, 'geocode_' . $data->field_id, $geocode );
 				}
 			}
 		}
+		function pp_loc_xprofile_data_after_delete( $obj ) {
+			delete_user_meta( $obj->user_id, 'geocode_' . $obj->field_id );
+		}
 		function pp_loc_xprofile_field_after_save( $obj ){
 
-			//write_log('pp_loc_xprofile_field_after_save - $obj');
-			//write_log($obj);
 			if ( $obj->type == 'location' ) {
 				if ( isset( $_POST['location_option'] ) ) { //&& $_POST['location_option'][1] == '1' ) {
 					bp_xprofile_update_meta( $obj->id, 'data', 'geocode', $_POST['location_option'][1] );
@@ -233,8 +238,24 @@ if ( function_exists( 'pp_mm_load_dot' ) ) {
 				//	bp_xprofile_delete_meta( $obj->id, 'data', 'geocode' );
 			}
 		}
-		function pp_loc_xprofile_data_after_delete( $obj ) {
-			delete_user_meta( $obj->user_id, 'geocode_' . $obj->field_id );
+		function pp_loc_xprofile_field_after_delete( $data, $delete ) {
+			global $wpdb;
+
+			$bp  = buddypress();
+			$geocode_id = 'geocode_' . $data->id;
+			$id = $data->id;
+
+			// delete the geocode
+			$wpdb->delete( $wpdb->usermeta, array( 'meta_key' => $geocode_id ), array( '%s' ) );
+
+			// delete from xprofile_meta > object_id
+			$sql = $wpdb->prepare( "DELETE FROM {$bp->profile->table_name_meta} WHERE object_id = %d", $id );
+			$wpdb->query( $sql );
+
+			// delete from xprofile_data > field_id
+			$sql = $wpdb->prepare( "DELETE FROM {$bp->profile->table_name_data} WHERE field_id = %d", $id );
+			$wpdb->query( $sql );
+
 		}
 		function pp_loc_field_options_before_save( $post_option,  $type ) {
 			if ( $type == 'location' )  {

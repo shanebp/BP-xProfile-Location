@@ -1,22 +1,24 @@
 === BP xProfile Location ===
 Contributors: shanebp
 Donate link: https://www.philopress.com/donate/
-Tags: buddypress, members, profile, xprofile, location, address, geocode, map
+Tags: buddypress, members, geocode, map, buddyboss
 Author: PhiloPress
 Author URI: https://philopress.com/
 Plugin URI: https://www.philopress.com/products/bp-xprofile-location/
 Requires at least: 4.0
-Tested up to: 5.1
-Stable tag: 2.0
+Tested up to: 5.4
+Stable tag: 3.0
 License: GPLv2 or later
 
 == Description ==
 
-This is a BuddyPress plugin that creates an xProfile Location field type that will use the Google Places API to populate and validate the address fields.
+This plugin works with both BuddyPress and the BuddyBoss Platform. It creates an xProfile Location field type that will use the Google Places API to populate and validate address fields on member profiles.
 
 The result will be *uniform* and *searchable* addresses with a *single* input field.
 
-You can create multiple Location fields via *wp-admin > Users > Profile Fields > Add New Field*
+In BuddyPress, you can create multiple Location fields via *wp-admin > Users > Profile Fields > Add New Field*
+
+In BuddyBoss Platform, you can create multiple Location fields via *wp-admin > BuddyBoss > Profiles > Profile Fields > Add New Field*
 
 The xprofile field for each member will be populated as a searchable string.
 
@@ -24,9 +26,9 @@ A latitude / longitude 'geocode' will be saved as a separate field, if that opti
 
 You can then use the geocode in your preferred Member Map solution.
 
-Or you may be interested in this BuddyPress **Member Map** solution: [BP Maps for Members](https://www.philopress.com/products/bp-maps-for-members "BP Maps for Members")
+Or you may be interested in this **Member Map** solution: [BP Maps for Members](https://www.philopress.com/products/bp-maps-for-members "BP Maps for Members")
 
-For BuddyPress **Group Maps**, please see: [BP Maps for Groups](https://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
+For **Group Maps**, please see: [BP Maps for Groups](https://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
 
 
 For more information about this plugin, please visit [BP xProfile Location](https://www.philopress.com/products/bp-xprofile-location/ "BP xProfile Location")
@@ -40,9 +42,11 @@ For more information about this plugin, please visit [BP xProfile Location](http
 
 3. Activate the plugin through the 'Plugins' menu in WordPress
 
-4. Go to wp-admin > Settings > BuddyPress > Options. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
+4-A. If you are using BuddyPress: Go to wp-admin > Settings > BuddyPress > Options. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
+4-B. Or if you use BuddyBoss Platform: Go to wp-admin > BuddyBoss > Integrations > BuddyPress Plugins. Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
 
-5. Go to wp-admin > Users > Profile Fields > Add New Field and Create a profile field of Type = Location.
+5-A. If you are using BuddyPress: Go to wp-admin > Users > Profile Fields > Add New Field and Create a profile field of Type = Location.
+5-B. Or if you use BuddyBoss Platform:  Go to wp-admin > > BuddyBoss > Profiles > Profile Fields > Add New Field and Create a profile field of Type = Location.
 
 
 
@@ -53,13 +57,17 @@ For more information about this plugin, please visit [BP xProfile Location](http
 Yes. If you need help, read this tutorial: [Google Maps API Key](https://www.philopress.com/google-maps-api-key/ "Google Maps API Key")
 
 = I have a Google Maps API Key. Where do I put it? =
-Go to wp-admin > Settings > BuddyPress > Options.
-Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
+
+If you use BuddyPress:  Go to wp-admin > Settings > BuddyPress > Options.  Under 'Profile Settings', find 'Google Maps API key', enter your key and Save.
+
+Or if you use BuddyBoss Platform: Go to wp-admin > BuddyBoss > Integrations > PhiloPress. Find 'Google Maps API key', enter your key and Save.
 
 = Other questions? =
-* Multisite support - Yes
+* Multisite support - Maybe. Not tested in all configs
 * Works with [BP Profile Search](https://wordpress.org/plugins/bp-profile-search/ "BP Profile Search plugin")
-* Maps are not included. For member maps, please see: [BP Maps for Members](https://www.philopress.com/products/bp-maps-for-members "BP Maps for Members"). For group maps, please see: [BP Maps for Groups](https://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
+* Maps are not included.
+	For BuddyPress or BuddyBoss Platform, please see: [BP Maps for Members](https://www.philopress.com/products/bp-maps-for-members "BP Maps for Members").
+	For group maps, please see: [BP Maps for Groups](https://www.philopress.com/products/bp-maps-for-groups "BP Maps for Groups")
 
 
 
@@ -71,6 +79,11 @@ Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
 
 
 == Changelog ==
+
+= 3.0 =
+* Tested with 5.4
+* Improve support for the BuddyBoss Platform - an alternative to BuddyPress
+* Improve cleanup on deletion of a field of type Location
 
 = 2.0 =
 * Tested with 5.1.1
@@ -108,6 +121,15 @@ Under 'Profile Settings', find 'Google Maps API key', enter your key and Save
 
 
 == Upgrade Notice ==
+
+= 3.1 =
+* Tested with 5.4
+* Improve support for the BuddyBoss Platform - an alternative to BuddyPress
+* Improve cleanup on deletion of a field of type Location
+
+= 3.0 =
+* Tested with 5.2.2
+* Add support for the BuddyBoss Platform - an alternative to BuddyPress
 
 = 2.0 =
 * Tested with 5.1.1
